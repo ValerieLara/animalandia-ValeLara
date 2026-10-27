@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import hero from "@/assets/hero-axolotl.jpg";
 import pair from "@/assets/axolotl-pair.jpg";
 
@@ -68,6 +68,23 @@ function Index() {
   const [showTop, setShowTop] = useState(false);
   const [cookies, setCookies] = useState(false);
   const [menu, setMenu] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (!menu) return;
+    menuRef.current?.querySelector("a")?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") { setMenu(false); toggleRef.current?.focus(); }
+      if (e.key === "Tab" && menuRef.current) {
+        const items: HTMLElement[] = [toggleRef.current!, ...Array.from(menuRef.current.querySelectorAll("a"))];
+        const i = items.indexOf(document.activeElement as HTMLElement);
+        if (e.shiftKey && i === 0) { e.preventDefault(); items[items.length - 1]?.focus(); }
+        else if (!e.shiftKey && i === items.length - 1) { e.preventDefault(); items[0]?.focus(); }
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [menu]);
   useEffect(() => {
     const on = () => setShowTop(window.scrollY > 400);
     window.addEventListener("scroll", on);
@@ -75,23 +92,44 @@ function Index() {
     return () => window.removeEventListener("scroll", on);
   }, []);
 
+  const focusRing = "rounded-md outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2 focus-visible:ring-offset-deep";
+
   return (
     <div className="bg-background text-foreground">
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-md">
+      <a href="#queson" className="sr-only z-50 rounded-md bg-coral px-4 py-2 font-semibold text-deep focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Saltar al contenido</a>
+      <header className="fixed inset-x-0 top-0 z-40 border-b border-on-image/15 bg-deep/70 text-on-image backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <a href="#inicio" className="font-display text-xl font-black tracking-tight text-primary">Animalandia<span className="text-coral">.</span></a>
-          <nav className="hidden gap-7 text-sm font-semibold text-muted-foreground md:flex">
-            {nav.map(([id, l]) => <a key={id} href={`#${id}`} className="transition-colors hover:text-primary">{l}</a>)}
+          <a href="#inicio" className={`font-display text-xl font-black tracking-tight text-on-image ${focusRing}`}>Animalandia<span className="text-coral">.</span></a>
+          <nav aria-label="Secciones" className="hidden gap-7 text-sm font-semibold md:flex">
+            {nav.map(([id, l]) => <a key={id} href={`#${id}`} className={`text-on-image transition-colors hover:text-coral ${focusRing}`}>{l}</a>)}
           </nav>
-          <button onClick={() => setMenu(!menu)} aria-label="Abrir menú" aria-expanded={menu} className="grid h-10 w-10 shrink-0 place-items-center rounded-full text-primary md:hidden">
+          <button
+            ref={toggleRef}
+            type="button"
+            onClick={() => setMenu(!menu)}
+            aria-label={menu ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={menu}
+            aria-controls="menu-movil"
+            className={`grid h-11 w-11 shrink-0 place-items-center rounded-full text-on-image md:hidden ${focusRing}`}
+          >
             <Icon d={menu ? "M6 6l12 12M18 6L6 18" : "M4 7h16M4 12h16M4 17h16"} />
           </button>
         </div>
-        {menu && (
-          <nav className="border-t border-border bg-background px-6 py-4 md:hidden">
-            {nav.map(([id, l]) => <a key={id} href={`#${id}`} onClick={() => setMenu(false)} className="block py-3 font-semibold text-foreground hover:text-primary">{l}</a>)}
-          </nav>
-        )}
+        <nav
+          id="menu-movil"
+          ref={menuRef}
+          aria-label="Menú principal"
+          hidden={!menu}
+          className="border-t border-on-image/15 bg-deep px-6 py-4 md:hidden"
+        >
+          <ul>
+            {nav.map(([id, l]) => (
+              <li key={id}>
+                <a href={`#${id}`} onClick={() => setMenu(false)} className={`block px-2 py-3 font-semibold text-on-image hover:text-coral ${focusRing}`}>{l}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </header>
 
       {/* Hero */}
