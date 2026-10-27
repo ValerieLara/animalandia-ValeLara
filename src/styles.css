@@ -56,6 +56,7 @@
   --color-coral: var(--coral);
   --color-lagoon: var(--lagoon);
   --color-deep: var(--deep);
+  --color-on-image: var(--on-image);
   --color-deep-foreground: var(--deep-foreground);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
@@ -86,6 +87,7 @@
   --coral: oklch(0.72 0.14 10);
   --lagoon: oklch(0.72 0.1 190);
   --deep: oklch(0.22 0.045 215);
+  --on-image: oklch(1 0 0);
   --deep-foreground: oklch(0.94 0.02 190);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
