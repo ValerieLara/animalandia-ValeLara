@@ -76,7 +76,7 @@ function Index() {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") { setMenu(false); toggleRef.current?.focus(); }
       if (e.key === "Tab" && menuRef.current) {
-        const items = [toggleRef.current!, ...menuRef.current.querySelectorAll("a")];
+        const items: HTMLElement[] = [toggleRef.current!, ...Array.from(menuRef.current.querySelectorAll("a"))];
         const i = items.indexOf(document.activeElement as HTMLElement);
         if (e.shiftKey && i === 0) { e.preventDefault(); items[items.length - 1].focus(); }
         else if (!e.shiftKey && i === items.length - 1) { e.preventDefault(); items[0].focus(); }
