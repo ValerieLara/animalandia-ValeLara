@@ -97,7 +97,7 @@ function Index() {
   return (
     <div className="bg-background text-foreground">
       <a href="#queson" className="sr-only z-50 rounded-md bg-coral px-4 py-2 font-semibold text-deep focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Saltar al contenido</a>
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-on-image/15 bg-deep/85 text-on-image backdrop-blur-md">
+      <header className="fixed inset-x-0 top-0 z-40 border-b border-on-image/15 bg-deep/80 text-on-image backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
           <a href="#inicio" className={`font-display text-xl font-black tracking-tight text-on-image ${focusRing}`}>Animalandia<span className="text-coral">.</span></a>
           <nav aria-label="Secciones" className="hidden gap-7 text-sm font-semibold md:flex">
