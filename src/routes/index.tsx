@@ -36,10 +36,10 @@ const stages = [
 
 function Section({ id, n, title, children }: { id: string; n: string; title: string; children: React.ReactNode }) {
   return (
-    <section id={id} className="scroll-mt-24 py-20 md:py-28">
+    <section id={id} className="scroll-mt-24 py-16 md:py-28">
       <div className="mx-auto max-w-6xl px-6">
         <p className="mb-3 text-sm font-bold tracking-[0.2em] text-coral">{n}</p>
-        <h2 className="mb-10 text-4xl font-black text-foreground md:text-6xl">{title}</h2>
+        <h2 className="mb-8 text-3xl font-black text-foreground sm:text-5xl md:text-6xl">{title}</h2>
         {children}
       </div>
     </section>
@@ -67,6 +67,7 @@ const socials = [
 function Index() {
   const [showTop, setShowTop] = useState(false);
   const [cookies, setCookies] = useState(false);
+  const [menu, setMenu] = useState(false);
   useEffect(() => {
     const on = () => setShowTop(window.scrollY > 400);
     window.addEventListener("scroll", on);
@@ -82,7 +83,15 @@ function Index() {
           <nav className="hidden gap-7 text-sm font-semibold text-muted-foreground md:flex">
             {nav.map(([id, l]) => <a key={id} href={`#${id}`} className="transition-colors hover:text-primary">{l}</a>)}
           </nav>
+          <button onClick={() => setMenu(!menu)} aria-label="Abrir menú" aria-expanded={menu} className="grid h-10 w-10 shrink-0 place-items-center rounded-full text-primary md:hidden">
+            <Icon d={menu ? "M6 6l12 12M18 6L6 18" : "M4 7h16M4 12h16M4 17h16"} />
+          </button>
         </div>
+        {menu && (
+          <nav className="border-t border-border bg-background px-6 py-4 md:hidden">
+            {nav.map(([id, l]) => <a key={id} href={`#${id}`} onClick={() => setMenu(false)} className="block py-3 font-semibold text-foreground hover:text-primary">{l}</a>)}
+          </nav>
+        )}
       </header>
 
       {/* Hero */}
@@ -91,13 +100,13 @@ function Index() {
         <div className="absolute inset-0 bg-gradient-to-t from-deep via-deep/50 to-transparent" />
         <div className="relative mx-auto w-full max-w-6xl px-6 pb-20 pt-32">
           <p className="mb-4 text-sm font-bold tracking-[0.3em] text-lagoon">GUÍA DE ESPECIES · MÉXICO</p>
-          <h1 className="text-6xl font-black leading-[0.9] text-deep-foreground md:text-[9rem]">Ajolotes</h1>
-          <p className="mt-6 max-w-2xl text-lg text-deep-foreground/85">
+          <h1 className="text-5xl font-black leading-[0.9] text-deep-foreground sm:text-7xl lg:text-[9rem]">Ajolotes</h1>
+          <p className="mt-6 max-w-2xl text-base sm:text-lg text-deep-foreground/85">
             Anfibios del género <em>Ambystoma</em> que conservan rasgos larvarios en la edad adulta —un fenómeno llamado neotenia. Muchas especies están en riesgo por la alteración de su hábitat.
           </p>
-          <div className="mt-10 grid max-w-xl grid-cols-3 gap-6 border-t border-deep-foreground/20 pt-6 text-deep-foreground">
+          <div className="mt-10 grid max-w-xl grid-cols-3 gap-3 sm:gap-6 border-t border-deep-foreground/20 pt-6 text-deep-foreground">
             {[["33", "especies"], ["16", "endémicas de México"], ["15", "años de vida"]].map(([a, b]) => (
-              <div key={b}><p className="font-display text-4xl font-black text-coral">{a}</p><p className="text-sm opacity-80">{b}</p></div>
+              <div key={b}><p className="font-display text-3xl font-black text-coral sm:text-4xl">{a}</p><p className="text-xs opacity-80 sm:text-sm">{b}</p></div>
             ))}
           </div>
         </div>
@@ -118,11 +127,11 @@ function Index() {
         <Section id="quecomen" n="02" title="¿Qué comen?">
           <p className="mb-10 max-w-3xl text-lg leading-relaxed text-secondary-foreground/80">Su dieta es carnívora. Sus dientes sirven para sujetar, no para masticar: abre su gran boca, succiona agua junto con la presa y la traga entera.</p>
           <div className="grid gap-6 md:grid-cols-2">
-            <article className="rounded-3xl bg-card p-8 shadow-sm">
+            <article className="rounded-3xl bg-card p-6 sm:p-8 shadow-sm">
               <h3 className="mb-3 text-2xl font-bold text-primary">Alimento vivo</h3>
               <p className="text-muted-foreground">Pequeños crustáceos, gusanos, lombrices, babosas, caracoles, grillos, larvas de mosquito, renacuajos y, ocasionalmente, peces del lago de Xochimilco.</p>
             </article>
-            <article className="rounded-3xl bg-card p-8 shadow-sm">
+            <article className="rounded-3xl bg-card p-6 sm:p-8 shadow-sm">
               <h3 className="mb-3 text-2xl font-bold text-primary">Alimento seco</h3>
               <p className="text-muted-foreground">En cautiverio: camarones disecados o alimento flotante. Evita hojuelas que se hunden: al comerlas puede succionar piedras del fondo y dañar gravemente su salud.</p>
             </article>
@@ -147,7 +156,7 @@ function Index() {
       <div className="bg-muted">
         <Section id="reproduccion" n="04" title="¿Cómo se reproducen?">
           <p className="mb-12 max-w-3xl text-lg text-muted-foreground">Reproducción sexual con fecundación interna. Son ovíparos y maduran a partir del año de vida.</p>
-          <ol className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <ol className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {stages.map(([t, d], i) => (
               <li key={t} className="relative rounded-3xl bg-card p-7 shadow-sm">
                 <span className="font-display text-5xl font-black text-lagoon">{i + 1}</span>
@@ -171,16 +180,16 @@ function Index() {
       {/* Footer */}
       <footer className="bg-deep text-deep-foreground">
         <div className="mx-auto max-w-6xl px-6 pt-20">
-          <blockquote className="mb-16 max-w-3xl font-display text-2xl leading-snug md:text-3xl">
+          <blockquote className="mb-12 max-w-3xl font-display text-xl sm:text-2xl leading-snug md:text-3xl">
             “Los animales no son propiedades o cosas, sino organismos vivientes, sujetos a una vida, que merecen nuestra compasión, respeto, amistad y apoyo.”
             <cite className="mt-4 block font-sans text-sm not-italic text-lagoon">— Marc Bekoff</cite>
           </blockquote>
-          <div className="grid gap-12 border-t border-deep-foreground/15 py-14 md:grid-cols-4">
-            <div className="md:col-span-2">
+          <div className="grid gap-10 border-t border-deep-foreground/15 py-14 sm:grid-cols-2 md:grid-cols-4">
+            <div className="sm:col-span-2">
               <p className="font-display text-3xl font-black">Animalandia<span className="text-coral">.</span></p>
               <p className="mt-3 max-w-sm text-sm opacity-75">Divulgación sobre fauna mexicana para conocer, respetar y proteger a las especies en peligro.</p>
               <p className="mt-4 text-sm opacity-75">Escrito por <strong className="opacity-100">Valerie Cristel Lara Díaz</strong></p>
-              <div className="mt-6 flex gap-3">
+              <div className="mt-6 flex flex-wrap gap-3">
                 {socials.map(([n, h, d]) => (
                   <a key={n} href={h} target="_blank" rel="noreferrer" aria-label={n} className="grid h-11 w-11 place-items-center rounded-full border border-deep-foreground/20 transition-colors hover:border-coral hover:bg-coral hover:text-deep"><Icon d={d} /></a>
                 ))}
@@ -200,7 +209,7 @@ function Index() {
               </ul>
             </div>
           </div>
-          <div className="grid gap-6 border-t border-deep-foreground/15 py-10 text-xs leading-relaxed opacity-70 md:grid-cols-4">
+          <div className="grid gap-6 border-t border-deep-foreground/15 py-10 text-xs leading-relaxed opacity-70 sm:grid-cols-2 lg:grid-cols-4">
             <p id="aviso"><strong>Aviso legal.</strong> Sitio con fines educativos y sin ánimo de lucro. Las imágenes de terceros pertenecen a sus autores.</p>
             <p id="privacidad"><strong>Privacidad.</strong> No recopilamos datos personales. Los enlaces externos se rigen por sus propias políticas.</p>
             <p id="terminos"><strong>Términos.</strong> Puedes compartir el contenido citando la fuente. Prohibido su uso comercial sin autorización.</p>
