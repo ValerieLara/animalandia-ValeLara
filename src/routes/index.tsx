@@ -78,8 +78,8 @@ function Index() {
       if (e.key === "Tab" && menuRef.current) {
         const items: HTMLElement[] = [toggleRef.current!, ...Array.from(menuRef.current.querySelectorAll("a"))];
         const i = items.indexOf(document.activeElement as HTMLElement);
-        if (e.shiftKey && i === 0) { e.preventDefault(); items[items.length - 1].focus(); }
-        else if (!e.shiftKey && i === items.length - 1) { e.preventDefault(); items[0].focus(); }
+        if (e.shiftKey && i === 0) { e.preventDefault(); items[items.length - 1]?.focus(); }
+        else if (!e.shiftKey && i === items.length - 1) { e.preventDefault(); items[0]?.focus(); }
       }
     };
     document.addEventListener("keydown", onKey);
