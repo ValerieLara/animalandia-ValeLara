@@ -82,7 +82,7 @@ function Index() {
   const [showTop, setShowTop] = useState(false);
   const [cookies, setCookies] = useState(false);
   const [menu, setMenu] = useState(false);
-  const [zoom, setZoom] = useState(false);
+  const [zoom, setZoom] = useState<{ src: string; alt: string } | null>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLElement>(null);
   const zoomBtnRef = useRef<HTMLButtonElement>(null);
@@ -224,7 +224,7 @@ function Index() {
               <button
                 ref={zoomBtnRef}
                 type="button"
-                onClick={() => setZoom(true)}
+                onClick={() => setZoom({ src: ciclo.url, alt: "Infografía del ciclo reproductivo del ajolote: cortejo y cópula, gestación y desarrollo del huevo, y nacimiento y cría" })}
                 aria-label="Ampliar la infografía del ciclo reproductivo del ajolote"
                 className="group block w-full cursor-zoom-in"
               >
@@ -313,12 +313,12 @@ function Index() {
         <div
           role="dialog"
           aria-modal="true"
-          aria-label="Infografía del ciclo reproductivo del ajolote ampliada"
+          aria-label="Imagen ampliada"
           onClick={closeZoom}
           className="fixed inset-0 z-[60] overflow-auto bg-deep/90 p-4 backdrop-blur-sm"
         >
           <div className="flex min-h-full items-center justify-center">
-            <div onClick={(e) => e.stopPropagation()} className="relative w-full max-w-2xl rounded-3xl bg-card p-3 shadow-2xl">
+            <div onClick={(e) => e.stopPropagation()} className="relative w-full max-w-4xl rounded-3xl bg-card p-3 shadow-2xl">
               <button
                 ref={closeZoomRef}
                 type="button"
@@ -329,10 +329,8 @@ function Index() {
                 <Icon d="M6 6l12 12M18 6L6 18" />
               </button>
               <img
-                src={ciclo.url}
-                alt="Infografía del ciclo reproductivo del ajolote: cortejo y cópula, gestación y desarrollo del huevo, y nacimiento y cría"
-                width={497}
-                height={617}
+                src={zoom.src}
+                alt={zoom.alt}
                 className="mx-auto h-auto max-h-[80vh] w-auto rounded-2xl"
               />
             </div>
