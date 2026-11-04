@@ -263,13 +263,13 @@ function Index() {
               <figure className="group relative aspect-[4/3] h-full overflow-hidden rounded-3xl bg-muted shadow-lg lg:aspect-auto">
                 <button
                   type="button"
-                  onClick={() => setZoom({ src: g.src, alt: g.alt })}
+                  onClick={(e) => { openerRef.current = e.currentTarget; setZoom({ src: g.src, alt: g.alt }); }}
                   aria-label={`Ampliar la foto de ${g.name}`}
                   className={`absolute inset-0 cursor-zoom-in ${focusRing}`}
                 >
                   <img src={g.src} alt={g.alt} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                  <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-deep/90 via-deep/25 to-transparent" />
-                  <span className="absolute inset-x-0 bottom-0 p-4 text-left text-on-image sm:p-5">
+                  <span aria-hidden="true" className={`absolute inset-0 bg-gradient-to-t ${g.credit ? "from-deep via-deep/60 to-deep/10" : "from-deep/90 via-deep/25 to-transparent"}`} />
+                  <span className={`absolute inset-x-0 p-4 text-left text-on-image sm:p-5 ${g.credit ? "bottom-7" : "bottom-0"}`}>
                     <span className="block font-display text-lg font-black leading-tight sm:text-xl">{g.name}</span>
                     {g.sci ? <span className="block text-xs italic opacity-85 sm:text-sm">{g.sci}</span> : null}
                   </span>
