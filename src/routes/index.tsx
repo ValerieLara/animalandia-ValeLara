@@ -295,6 +295,37 @@ function Index() {
         </div>
       </footer>
 
+      {zoom && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Infografía del ciclo reproductivo del ajolote ampliada"
+          onClick={closeZoom}
+          className="fixed inset-0 z-50 overflow-auto bg-deep/90 p-4 backdrop-blur-sm"
+        >
+          <div className="flex min-h-full items-center justify-center">
+            <div onClick={(e) => e.stopPropagation()} className="relative w-full max-w-2xl rounded-3xl bg-card p-3 shadow-2xl">
+              <button
+                ref={closeZoomRef}
+                type="button"
+                onClick={closeZoom}
+                aria-label="Cerrar imagen ampliada"
+                className="absolute right-4 top-4 z-10 grid h-11 w-11 place-items-center rounded-full bg-deep text-deep-foreground transition-colors hover:bg-coral hover:text-deep"
+              >
+                <Icon d="M6 6l12 12M18 6L6 18" />
+              </button>
+              <img
+                src={ciclo.url}
+                alt="Infografía del ciclo reproductivo del ajolote: cortejo y cópula, gestación y desarrollo del huevo, y nacimiento y cría"
+                width={497}
+                height={617}
+                className="mx-auto h-auto max-h-[80vh] w-auto rounded-2xl"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
       {showTop && (
         <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label="Volver arriba" className="fixed bottom-6 right-6 z-40 grid h-12 w-12 place-items-center rounded-full bg-coral text-deep shadow-xl transition-transform hover:-translate-y-1">
           <Icon d="M12 19V5M5 12l7-7 7 7" />
