@@ -1,14 +1,24 @@
-# Welcome to your Lovable project
+# Animalandia
+
+Actúa como un diseñador UI/UX senior y desarrollador web senior frontend con experiencia en desarrollo en páginas creativa. A continuación voy a cargar 3 archivos que es una página web. Quiero que me ayudes a mejorar la página web, que se vea más presentable, más profesional; en el footer agrégale:
+
+-Información legal (Legal Stack): Incluye avisos legales, políticas de privacidad, términos y condiciones o el uso de cookies.
+
+-Branding y redes sociales
+
+-Derechos de autor
 
 This project was built with [Lovable](https://lovable.dev).
 
+**Live app**: https://animalandia.lovable.app
+
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/a1005cf9-7155-4c28-b904-30db034e67e5).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +30,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
