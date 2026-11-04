@@ -34,8 +34,8 @@ const nav = [
 const species = ["mexicanum","rivulare","taylori","amblycephalum","altamirani","andersoni","annulatum","barbouri","bishopi","bombypellum","californiense","cingulatum","dumerilii","flavipiperatum","gracile","granulosum","jeffersonianum","laterale","leorae","lermaense","mabeei","macrodactylum","maculatum","mavortium","opacum","ordinarium","rosaceum","silvense","subsalsum","talpoideum","texanum","tigrinum","velasci"];
 
 const gallery = [
-  { src: gMexicano.url, name: "Ajolote mexicano", sci: "Ambystoma mexicanum", alt: "Ajolote mexicano leucístico de frente, blanco y rosado con branquias fucsia, sobre arena blanca", cls: "sm:col-span-2 lg:col-span-4 lg:row-span-2" },
-  { src: gAlchichica.url, name: "Ajolote de Alchichica", sci: "Ambystoma dumerilii", alt: "Ajolote de Alchichica pardo verdoso con manchas oscuras y branquias plumosas, en agua turquesa", cls: "lg:col-span-2" },
+  { src: gMexicano.url, name: "Ajolote mexicano", sci: "Ambystoma mexicanum", credit: false, alt: "Ajolote mexicano leucístico de frente, blanco y rosado con branquias fucsia, sobre arena blanca", cls: "sm:col-span-2 lg:col-span-4 lg:row-span-2" },
+  { src: gAlchichica.url, name: "Ajolote de Alchichica", sci: "Ambystoma dumerilii", credit: false, alt: "Ajolote de Alchichica pardo verdoso con manchas oscuras y branquias plumosas, en agua turquesa", cls: "lg:col-span-2" },
   { src: gAltamirani.url, name: "Ajolote de Altamirano", sci: "Ambystoma altamirani", credit: true, alt: "Salamandra terrestre oscura con motas claras caminando entre vegetación verde", cls: "lg:col-span-2" },
   { src: gArroyero.url, name: "Ajolote arroyero", sci: "", credit: false, alt: "Ajolote arroyero grisáceo moteado caminando de frente sobre arena clara con hojas", cls: "lg:col-span-3" },
   { src: gChata.url, name: "Ajolote de cabeza chata", sci: "", credit: true, alt: "Ajolote de cabeza chata amarillento con manchas marrones y branquias cobrizas sobre sustrato rocoso", cls: "lg:col-span-3" },
