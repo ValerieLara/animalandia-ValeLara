@@ -36,9 +36,9 @@ const species = ["mexicanum","rivulare","taylori","amblycephalum","altamirani","
 const gallery = [
   { src: gMexicano.url, name: "Ajolote mexicano", sci: "Ambystoma mexicanum", alt: "Ajolote mexicano leucístico de frente, blanco y rosado con branquias fucsia, sobre arena blanca", cls: "sm:col-span-2 lg:col-span-4 lg:row-span-2" },
   { src: gAlchichica.url, name: "Ajolote de Alchichica", sci: "Ambystoma dumerilii", alt: "Ajolote de Alchichica pardo verdoso con manchas oscuras y branquias plumosas, en agua turquesa", cls: "lg:col-span-2" },
-  { src: gAltamirani.url, name: "Ajolote de Altamirano", sci: "Ambystoma altamirani", alt: "Salamandra terrestre oscura con motas claras caminando entre vegetación verde", cls: "lg:col-span-2" },
-  { src: gArroyero.url, name: "Ajolote arroyero", sci: "", alt: "Ajolote arroyero grisáceo moteado caminando de frente sobre arena clara con hojas", cls: "lg:col-span-3" },
-  { src: gChata.url, name: "Ajolote de cabeza chata", sci: "", alt: "Ajolote de cabeza chata amarillento con manchas marrones y branquias cobrizas sobre sustrato rocoso", cls: "lg:col-span-3" },
+  { src: gAltamirani.url, name: "Ajolote de Altamirano", sci: "Ambystoma altamirani", credit: true, alt: "Salamandra terrestre oscura con motas claras caminando entre vegetación verde", cls: "lg:col-span-2" },
+  { src: gArroyero.url, name: "Ajolote arroyero", sci: "", credit: false, alt: "Ajolote arroyero grisáceo moteado caminando de frente sobre arena clara con hojas", cls: "lg:col-span-3" },
+  { src: gChata.url, name: "Ajolote de cabeza chata", sci: "", credit: true, alt: "Ajolote de cabeza chata amarillento con manchas marrones y branquias cobrizas sobre sustrato rocoso", cls: "lg:col-span-3" },
 ] as const;
 
 const stages = [
@@ -86,8 +86,9 @@ function Index() {
   const toggleRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLElement>(null);
   const zoomBtnRef = useRef<HTMLButtonElement>(null);
+  const openerRef = useRef<HTMLElement | null>(null);
   const closeZoomRef = useRef<HTMLButtonElement>(null);
-  const closeZoom = () => { setZoom(null); zoomBtnRef.current?.focus(); };
+  const closeZoom = () => { setZoom(null); (openerRef.current ?? zoomBtnRef.current)?.focus(); };
   useEffect(() => {
     if (!zoom) return;
     closeZoomRef.current?.focus();
@@ -224,7 +225,7 @@ function Index() {
               <button
                 ref={zoomBtnRef}
                 type="button"
-                onClick={() => setZoom({ src: ciclo.url, alt: "Infografía del ciclo reproductivo del ajolote: cortejo y cópula, gestación y desarrollo del huevo, y nacimiento y cría" })}
+                onClick={() => { openerRef.current = zoomBtnRef.current; setZoom({ src: ciclo.url, alt: "Infografía del ciclo reproductivo del ajolote: cortejo y cópula, gestación y desarrollo del huevo, y nacimiento y cría" }); }}
                 aria-label="Ampliar la infografía del ciclo reproductivo del ajolote"
                 className="group block w-full cursor-zoom-in"
               >
