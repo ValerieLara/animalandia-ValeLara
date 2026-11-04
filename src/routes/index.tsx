@@ -38,7 +38,7 @@ const gallery = [
   { src: gAlchichica.url, name: "Ajolote de Alchichica", sci: "Ambystoma dumerilii", credit: false, alt: "Ajolote de Alchichica pardo verdoso con manchas oscuras y branquias plumosas, en agua turquesa", cls: "lg:col-span-2" },
   { src: gAltamirani.url, name: "Ajolote de Altamirano", sci: "Ambystoma altamirani", credit: true, alt: "Salamandra terrestre oscura con motas claras caminando entre vegetación verde", cls: "lg:col-span-2" },
   { src: gArroyero.url, name: "Ajolote arroyero", sci: "", credit: false, alt: "Ajolote arroyero grisáceo moteado caminando de frente sobre arena clara con hojas", cls: "lg:col-span-3" },
-  { src: gChata.url, name: "Ajolote de cabeza chata", sci: "", credit: true, alt: "Ajolote de cabeza chata amarillento con manchas marrones y branquias cobrizas sobre sustrato rocoso", cls: "lg:col-span-3" },
+  { src: gChata.url, name: "Ajolote de cabeza chata", sci: "", credit: false, alt: "Ajolote de cabeza chata amarillento con manchas marrones y branquias cobrizas sobre sustrato rocoso", cls: "lg:col-span-3" },
 ] as const;
 
 const stages = [
