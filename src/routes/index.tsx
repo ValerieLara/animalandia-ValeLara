@@ -206,15 +206,38 @@ function Index() {
       <div className="bg-muted">
         <Section id="reproduccion" n="04" title="¿Cómo se reproducen?">
           <p className="mb-12 max-w-3xl text-lg text-muted-foreground">Reproducción sexual con fecundación interna. Son ovíparos y maduran a partir del año de vida.</p>
-          <ol className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {stages.map(([t, d], i) => (
-              <li key={t} className="relative rounded-3xl bg-card p-7 shadow-sm">
-                <span className="font-display text-5xl font-black text-lagoon">{i + 1}</span>
-                <h3 className="mt-3 mb-2 text-xl font-bold">{t}</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{d}</p>
-              </li>
-            ))}
-          </ol>
+          <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,24rem)_minmax(0,1fr)] lg:gap-14">
+            <figure className="overflow-hidden rounded-3xl bg-card shadow-xl ring-1 ring-border">
+              <button
+                ref={zoomBtnRef}
+                type="button"
+                onClick={() => setZoom(true)}
+                aria-label="Ampliar la infografía del ciclo reproductivo del ajolote"
+                className="group block w-full cursor-zoom-in"
+              >
+                <img
+                  src={ciclo.url}
+                  alt="Infografía del ciclo reproductivo del ajolote: cortejo y cópula, gestación y desarrollo del huevo, y nacimiento y cría"
+                  width={497}
+                  height={617}
+                  loading="lazy"
+                  className="h-auto w-full transition-transform duration-700 group-hover:scale-[1.03]"
+                />
+              </button>
+              <figcaption className="border-t border-border px-5 py-4 text-xs leading-relaxed text-muted-foreground">
+                Ciclo reproductivo del ajolote. Pulsa la imagen para verla más grande.
+              </figcaption>
+            </figure>
+            <ol className="grid gap-6 sm:grid-cols-2">
+              {stages.map(([t, d], i) => (
+                <li key={t} className="relative rounded-3xl bg-card p-7 shadow-sm">
+                  <span className="font-display text-5xl font-black text-lagoon">{i + 1}</span>
+                  <h3 className="mt-3 mb-2 text-xl font-bold">{t}</h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">{d}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
         </Section>
       </div>
 
