@@ -87,7 +87,7 @@ function Index() {
   const menuRef = useRef<HTMLElement>(null);
   const zoomBtnRef = useRef<HTMLButtonElement>(null);
   const closeZoomRef = useRef<HTMLButtonElement>(null);
-  const closeZoom = () => { setZoom(false); zoomBtnRef.current?.focus(); };
+  const closeZoom = () => { setZoom(null); zoomBtnRef.current?.focus(); };
   useEffect(() => {
     if (!zoom) return;
     closeZoomRef.current?.focus();
