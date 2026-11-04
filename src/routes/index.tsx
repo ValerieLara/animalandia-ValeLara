@@ -3,6 +3,11 @@ import { useEffect, useRef, useState } from "react";
 import hero from "@/assets/hero-axolotl.jpg";
 import pair from "@/assets/axolotl-pair.jpg";
 import ciclo from "@/assets/ciclo-reproductivo-ajolote.jpg.asset.json";
+import gMexicano from "@/assets/ajolote-mexicano.jpg.asset.json";
+import gAlchichica from "@/assets/ajolote-alchichica.jpg.asset.json";
+import gAltamirani from "@/assets/ambystoma-altamirani.jpg.asset.json";
+import gArroyero from "@/assets/ajolote-arroyero.jpg.asset.json";
+import gChata from "@/assets/ajolote-cabeza-chata.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,6 +32,14 @@ const nav = [
 ] as const;
 
 const species = ["mexicanum","rivulare","taylori","amblycephalum","altamirani","andersoni","annulatum","barbouri","bishopi","bombypellum","californiense","cingulatum","dumerilii","flavipiperatum","gracile","granulosum","jeffersonianum","laterale","leorae","lermaense","mabeei","macrodactylum","maculatum","mavortium","opacum","ordinarium","rosaceum","silvense","subsalsum","talpoideum","texanum","tigrinum","velasci"];
+
+const gallery = [
+  { src: gMexicano.url, name: "Ajolote mexicano", sci: "Ambystoma mexicanum", credit: false, alt: "Ajolote mexicano leucístico de frente, blanco y rosado con branquias fucsia, sobre arena blanca", cls: "sm:col-span-2 lg:col-span-4 lg:row-span-2" },
+  { src: gAlchichica.url, name: "Ajolote de Alchichica", sci: "Ambystoma dumerilii", credit: false, alt: "Ajolote de Alchichica pardo verdoso con manchas oscuras y branquias plumosas, en agua turquesa", cls: "lg:col-span-2" },
+  { src: gAltamirani.url, name: "Ajolote de Altamirano", sci: "Ambystoma altamirani", credit: true, alt: "Salamandra terrestre oscura con motas claras caminando entre vegetación verde", cls: "lg:col-span-2" },
+  { src: gArroyero.url, name: "Ajolote arroyero", sci: "", credit: false, alt: "Ajolote arroyero grisáceo moteado caminando de frente sobre arena clara con hojas", cls: "lg:col-span-3" },
+  { src: gChata.url, name: "Ajolote de cabeza chata", sci: "", credit: false, alt: "Ajolote de cabeza chata amarillento con manchas marrones y branquias cobrizas sobre sustrato rocoso", cls: "lg:col-span-3" },
+] as const;
 
 const stages = [
   ["Apareamiento", "Inicia con un cortejo: el macho y la hembra hacen movimientos circulares. El macho deja un espermatóforo que la hembra recoge con su cloaca. La temporada va de febrero a julio, aproximadamente."],
@@ -69,12 +82,13 @@ function Index() {
   const [showTop, setShowTop] = useState(false);
   const [cookies, setCookies] = useState(false);
   const [menu, setMenu] = useState(false);
-  const [zoom, setZoom] = useState(false);
+  const [zoom, setZoom] = useState<{ src: string; alt: string } | null>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLElement>(null);
   const zoomBtnRef = useRef<HTMLButtonElement>(null);
+  const openerRef = useRef<HTMLElement | null>(null);
   const closeZoomRef = useRef<HTMLButtonElement>(null);
-  const closeZoom = () => { setZoom(false); zoomBtnRef.current?.focus(); };
+  const closeZoom = () => { setZoom(null); (openerRef.current ?? zoomBtnRef.current)?.focus(); };
   useEffect(() => {
     if (!zoom) return;
     closeZoomRef.current?.focus();
@@ -211,7 +225,7 @@ function Index() {
               <button
                 ref={zoomBtnRef}
                 type="button"
-                onClick={() => setZoom(true)}
+                onClick={() => { openerRef.current = zoomBtnRef.current; setZoom({ src: ciclo.url, alt: "Infografía del ciclo reproductivo del ajolote: cortejo y cópula, gestación y desarrollo del huevo, y nacimiento y cría" }); }}
                 aria-label="Ampliar la infografía del ciclo reproductivo del ajolote"
                 className="group block w-full cursor-zoom-in"
               >
@@ -242,7 +256,30 @@ function Index() {
       </div>
 
       <Section id="tipos" n="05" title="Tipos de ajolotes">
-        <p className="mb-8 text-lg text-muted-foreground">Existen 33 especies del género <em>Ambystoma</em>:</p>
+        <p className="mb-10 max-w-3xl text-lg text-muted-foreground">Existen 33 especies del género <em>Ambystoma</em>. Estas cinco son parte de ellas:</p>
+        <ul className="mb-4 grid gap-4 sm:grid-cols-2 lg:auto-rows-[13rem] lg:grid-cols-6">
+          {gallery.map((g) => (
+            <li key={g.name} className={g.cls}>
+              <figure className="group relative aspect-[4/3] h-full overflow-hidden rounded-3xl bg-muted shadow-lg lg:aspect-auto">
+                <button
+                  type="button"
+                  onClick={(e) => { openerRef.current = e.currentTarget; setZoom({ src: g.src, alt: g.alt }); }}
+                  aria-label={`Ampliar la foto de ${g.name}`}
+                  className={`absolute inset-0 cursor-zoom-in ${focusRing}`}
+                >
+                  <img src={g.src} alt={g.alt} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <span aria-hidden="true" className={`absolute inset-0 bg-gradient-to-t ${g.credit ? "from-deep via-deep/60 to-deep/10" : "from-deep/90 via-deep/25 to-transparent"}`} />
+                  <span className={`absolute inset-x-0 p-4 text-left text-on-image sm:p-5 ${g.credit ? "bottom-7" : "bottom-0"}`}>
+                    <span className="block font-display text-lg font-black leading-tight sm:text-xl">{g.name}</span>
+                    {g.sci ? <span className="block text-xs italic opacity-85 sm:text-sm">{g.sci}</span> : null}
+                  </span>
+                </button>
+              </figure>
+            </li>
+          ))}
+        </ul>
+        <p className="mb-12 text-xs text-muted-foreground">Fotografías de terceros, cortesía de sus autores. Pulsa cualquiera para verla más grande.</p>
+        <h3 className="mb-5 text-xl font-bold text-foreground">Las 33 especies</h3>
         <ul className="flex flex-wrap gap-2">
           {species.map((s) => (
             <li key={s} className="rounded-full border border-border bg-card px-4 py-2 text-sm italic text-foreground transition-colors hover:border-primary hover:bg-secondary">A. {s}</li>
@@ -300,12 +337,12 @@ function Index() {
         <div
           role="dialog"
           aria-modal="true"
-          aria-label="Infografía del ciclo reproductivo del ajolote ampliada"
+          aria-label="Imagen ampliada"
           onClick={closeZoom}
           className="fixed inset-0 z-[60] overflow-auto bg-deep/90 p-4 backdrop-blur-sm"
         >
           <div className="flex min-h-full items-center justify-center">
-            <div onClick={(e) => e.stopPropagation()} className="relative w-full max-w-2xl rounded-3xl bg-card p-3 shadow-2xl">
+            <div onClick={(e) => e.stopPropagation()} className="relative w-full max-w-4xl rounded-3xl bg-card p-3 shadow-2xl">
               <button
                 ref={closeZoomRef}
                 type="button"
@@ -316,10 +353,8 @@ function Index() {
                 <Icon d="M6 6l12 12M18 6L6 18" />
               </button>
               <img
-                src={ciclo.url}
-                alt="Infografía del ciclo reproductivo del ajolote: cortejo y cópula, gestación y desarrollo del huevo, y nacimiento y cría"
-                width={497}
-                height={617}
+                src={zoom.src}
+                alt={zoom.alt}
                 className="mx-auto h-auto max-h-[80vh] w-auto rounded-2xl"
               />
             </div>
