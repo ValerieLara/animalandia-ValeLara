@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import hero from "@/assets/hero-axolotl.jpg";
 import pair from "@/assets/axolotl-pair.jpg";
+import ciclo from "@/assets/ciclo-reproductivo-ajolote.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -68,8 +69,19 @@ function Index() {
   const [showTop, setShowTop] = useState(false);
   const [cookies, setCookies] = useState(false);
   const [menu, setMenu] = useState(false);
+  const [zoom, setZoom] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLElement>(null);
+  const zoomBtnRef = useRef<HTMLButtonElement>(null);
+  const closeZoomRef = useRef<HTMLButtonElement>(null);
+  const closeZoom = () => { setZoom(false); zoomBtnRef.current?.focus(); };
+  useEffect(() => {
+    if (!zoom) return;
+    closeZoomRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") closeZoom(); };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [zoom]);
   useEffect(() => {
     if (!menu) return;
     menuRef.current?.querySelector("a")?.focus();
