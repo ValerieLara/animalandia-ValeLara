@@ -255,7 +255,30 @@ function Index() {
       </div>
 
       <Section id="tipos" n="05" title="Tipos de ajolotes">
-        <p className="mb-8 text-lg text-muted-foreground">Existen 33 especies del género <em>Ambystoma</em>:</p>
+        <p className="mb-10 max-w-3xl text-lg text-muted-foreground">Existen 33 especies del género <em>Ambystoma</em>. Estas cinco son parte de ellas:</p>
+        <ul className="mb-4 grid gap-4 sm:grid-cols-2 lg:auto-rows-[13rem] lg:grid-cols-6">
+          {gallery.map((g) => (
+            <li key={g.name} className={g.cls}>
+              <figure className="group relative aspect-[4/3] h-full overflow-hidden rounded-3xl bg-muted shadow-lg lg:aspect-auto">
+                <button
+                  type="button"
+                  onClick={() => setZoom({ src: g.src, alt: g.alt })}
+                  aria-label={`Ampliar la foto de ${g.name}`}
+                  className={`absolute inset-0 cursor-zoom-in ${focusRing}`}
+                >
+                  <img src={g.src} alt={g.alt} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-deep/90 via-deep/25 to-transparent" />
+                  <span className="absolute inset-x-0 bottom-0 p-4 text-left text-on-image sm:p-5">
+                    <span className="block font-display text-lg font-black leading-tight sm:text-xl">{g.name}</span>
+                    {g.sci ? <span className="block text-xs italic opacity-85 sm:text-sm">{g.sci}</span> : null}
+                  </span>
+                </button>
+              </figure>
+            </li>
+          ))}
+        </ul>
+        <p className="mb-12 text-xs text-muted-foreground">Fotografías de terceros, cortesía de sus autores. Pulsa cualquiera para verla más grande.</p>
+        <h3 className="mb-5 text-xl font-bold text-foreground">Las 33 especies</h3>
         <ul className="flex flex-wrap gap-2">
           {species.map((s) => (
             <li key={s} className="rounded-full border border-border bg-card px-4 py-2 text-sm italic text-foreground transition-colors hover:border-primary hover:bg-secondary">A. {s}</li>
