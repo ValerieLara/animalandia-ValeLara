@@ -206,7 +206,7 @@ function Index() {
 
       <Section id="dondeviven" n="03" title="¿Dónde viven?">
         <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:gap-14">
-          <figure className="overflow-hidden rounded-3xl bg-card shadow-xl ring-1 ring-border">
+          <figure className="mx-auto w-full max-w-[17rem] overflow-hidden rounded-3xl bg-card shadow-xl ring-1 ring-border sm:max-w-xs lg:max-w-none">
             <button
               type="button"
               onClick={(e) => { openerRef.current = e.currentTarget; setZoom({ src: habita.url, alt: "Infografía del hábitat de los ajolotes en México: arriba, un ajolote moteado visto desde arriba junto a la nota “Los ajolotes son un tipo de salamandra. También tienen similitudes con los sapos y ranas.”; al centro, un mapa de la República Mexicana en tono salmón y magenta con la nota “Existen 17 especies de ajolote y 16 son propias del territorio de México.” y, a la izquierda, “Les gusta vivir en hábitats acuáticos: ríos de montaña, lagos y canales. Viven en muchos estados de México, como Morelos, Puebla, Sonora ¡y más!”; abajo, siluetas de cipreses y un ajolote rosa con la nota “Hay muchos tipos de ajolote, pero la especie más conocida es la Ambystoma mexicanum. Sólo se encuentra de forma natural en Xochimilco.”; al pie, los logotipos de la Secretaría del Medio Ambiente de la Ciudad de México" }); }}
