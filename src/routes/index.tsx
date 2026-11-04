@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import hero from "@/assets/hero-axolotl.jpg";
 import pair from "@/assets/axolotl-pair.jpg";
@@ -276,16 +276,17 @@ function Index() {
             <div>
               <h4 className="mb-4 font-sans text-xs font-bold tracking-[0.2em] text-lagoon">LEGAL</h4>
               <ul className="space-y-2 text-sm opacity-80">
-                {[["aviso", "Aviso legal"], ["privacidad", "Política de privacidad"], ["terminos", "Términos y condiciones"], ["cookies", "Política de cookies"]].map(([id, l]) => (
-                  <li key={id}><a href={`#${id}`} className="hover:text-coral">{l}</a></li>
-                ))}
+                <li><a href="#aviso" className="hover:text-coral">Aviso legal</a></li>
+                <li><a href="#privacidad" className="hover:text-coral">Política de privacidad</a></li>
+                <li><Link to="/terminos" className="hover:text-coral">Términos y condiciones</Link></li>
+                <li><a href="#cookies" className="hover:text-coral">Política de cookies</a></li>
               </ul>
             </div>
           </div>
           <div className="grid gap-6 border-t border-deep-foreground/15 py-10 text-xs leading-relaxed opacity-70 sm:grid-cols-2 lg:grid-cols-4">
             <p id="aviso"><strong>Aviso legal.</strong> Sitio con fines educativos y sin ánimo de lucro. Las imágenes de terceros pertenecen a sus autores.</p>
             <p id="privacidad"><strong>Privacidad.</strong> No recopilamos datos personales. Los enlaces externos se rigen por sus propias políticas.</p>
-            <p id="terminos"><strong>Términos.</strong> Puedes compartir el contenido citando la fuente. Prohibido su uso comercial sin autorización.</p>
+            <p id="terminos"><strong>Términos.</strong> Puedes compartir el contenido citando la fuente. Prohibido su uso comercial sin autorización. <Link to="/terminos" className="font-semibold text-lagoon underline">Ver los términos completos</Link></p>
             <p id="cookies"><strong>Cookies.</strong> Solo guardamos tu preferencia de cookies en tu navegador; no usamos rastreo.</p>
           </div>
           <div className="flex flex-col justify-between gap-3 border-t border-deep-foreground/15 py-6 text-xs opacity-60 md:flex-row">
