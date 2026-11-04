@@ -301,7 +301,7 @@ function Index() {
           aria-modal="true"
           aria-label="Infografía del ciclo reproductivo del ajolote ampliada"
           onClick={closeZoom}
-          className="fixed inset-0 z-50 overflow-auto bg-deep/90 p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-[60] overflow-auto bg-deep/90 p-4 backdrop-blur-sm"
         >
           <div className="flex min-h-full items-center justify-center">
             <div onClick={(e) => e.stopPropagation()} className="relative w-full max-w-2xl rounded-3xl bg-card p-3 shadow-2xl">
