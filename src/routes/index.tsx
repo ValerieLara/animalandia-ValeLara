@@ -3,6 +3,11 @@ import { useEffect, useRef, useState } from "react";
 import hero from "@/assets/hero-axolotl.jpg";
 import pair from "@/assets/axolotl-pair.jpg";
 import ciclo from "@/assets/ciclo-reproductivo-ajolote.jpg.asset.json";
+import gMexicano from "@/assets/ajolote-mexicano.jpg.asset.json";
+import gAlchichica from "@/assets/ajolote-alchichica.jpg.asset.json";
+import gAltamirani from "@/assets/ambystoma-altamirani.jpg.asset.json";
+import gArroyero from "@/assets/ajolote-arroyero.jpg.asset.json";
+import gChata from "@/assets/ajolote-cabeza-chata.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,6 +32,14 @@ const nav = [
 ] as const;
 
 const species = ["mexicanum","rivulare","taylori","amblycephalum","altamirani","andersoni","annulatum","barbouri","bishopi","bombypellum","californiense","cingulatum","dumerilii","flavipiperatum","gracile","granulosum","jeffersonianum","laterale","leorae","lermaense","mabeei","macrodactylum","maculatum","mavortium","opacum","ordinarium","rosaceum","silvense","subsalsum","talpoideum","texanum","tigrinum","velasci"];
+
+const gallery = [
+  { src: gMexicano.url, name: "Ajolote mexicano", sci: "Ambystoma mexicanum", alt: "Ajolote mexicano leucístico de frente, blanco y rosado con branquias fucsia, sobre arena blanca", cls: "sm:col-span-2 lg:col-span-4 lg:row-span-2" },
+  { src: gAlchichica.url, name: "Ajolote de Alchichica", sci: "Ambystoma dumerilii", alt: "Ajolote de Alchichica pardo verdoso con manchas oscuras y branquias plumosas, en agua turquesa", cls: "lg:col-span-2" },
+  { src: gAltamirani.url, name: "Ajolote de Altamirano", sci: "Ambystoma altamirani", alt: "Salamandra terrestre oscura con motas claras caminando entre vegetación verde", cls: "lg:col-span-2" },
+  { src: gArroyero.url, name: "Ajolote arroyero", sci: "", alt: "Ajolote arroyero grisáceo moteado caminando de frente sobre arena clara con hojas", cls: "lg:col-span-3" },
+  { src: gChata.url, name: "Ajolote de cabeza chata", sci: "", alt: "Ajolote de cabeza chata amarillento con manchas marrones y branquias cobrizas sobre sustrato rocoso", cls: "lg:col-span-3" },
+] as const;
 
 const stages = [
   ["Apareamiento", "Inicia con un cortejo: el macho y la hembra hacen movimientos circulares. El macho deja un espermatóforo que la hembra recoge con su cloaca. La temporada va de febrero a julio, aproximadamente."],
