@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import hero from "@/assets/hero-axolotl.jpg";
 import pair from "@/assets/axolotl-pair.jpg";
+import ciclo from "@/assets/ciclo-reproductivo-ajolote.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -68,8 +69,19 @@ function Index() {
   const [showTop, setShowTop] = useState(false);
   const [cookies, setCookies] = useState(false);
   const [menu, setMenu] = useState(false);
+  const [zoom, setZoom] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLElement>(null);
+  const zoomBtnRef = useRef<HTMLButtonElement>(null);
+  const closeZoomRef = useRef<HTMLButtonElement>(null);
+  const closeZoom = () => { setZoom(false); zoomBtnRef.current?.focus(); };
+  useEffect(() => {
+    if (!zoom) return;
+    closeZoomRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") closeZoom(); };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [zoom]);
   useEffect(() => {
     if (!menu) return;
     menuRef.current?.querySelector("a")?.focus();
@@ -194,15 +206,38 @@ function Index() {
       <div className="bg-muted">
         <Section id="reproduccion" n="04" title="¿Cómo se reproducen?">
           <p className="mb-12 max-w-3xl text-lg text-muted-foreground">Reproducción sexual con fecundación interna. Son ovíparos y maduran a partir del año de vida.</p>
-          <ol className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {stages.map(([t, d], i) => (
-              <li key={t} className="relative rounded-3xl bg-card p-7 shadow-sm">
-                <span className="font-display text-5xl font-black text-lagoon">{i + 1}</span>
-                <h3 className="mt-3 mb-2 text-xl font-bold">{t}</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{d}</p>
-              </li>
-            ))}
-          </ol>
+          <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,24rem)_minmax(0,1fr)] lg:gap-14">
+            <figure className="overflow-hidden rounded-3xl bg-card shadow-xl ring-1 ring-border">
+              <button
+                ref={zoomBtnRef}
+                type="button"
+                onClick={() => setZoom(true)}
+                aria-label="Ampliar la infografía del ciclo reproductivo del ajolote"
+                className="group block w-full cursor-zoom-in"
+              >
+                <img
+                  src={ciclo.url}
+                  alt="Infografía del ciclo reproductivo del ajolote: cortejo y cópula, gestación y desarrollo del huevo, y nacimiento y cría"
+                  width={497}
+                  height={617}
+                  loading="lazy"
+                  className="h-auto w-full transition-transform duration-700 group-hover:scale-[1.03]"
+                />
+              </button>
+              <figcaption className="border-t border-border px-5 py-4 text-xs leading-relaxed text-muted-foreground">
+                Ciclo reproductivo del ajolote. Pulsa la imagen para verla más grande.
+              </figcaption>
+            </figure>
+            <ol className="grid gap-6 sm:grid-cols-2">
+              {stages.map(([t, d], i) => (
+                <li key={t} className="relative rounded-3xl bg-card p-7 shadow-sm">
+                  <span className="font-display text-5xl font-black text-lagoon">{i + 1}</span>
+                  <h3 className="mt-3 mb-2 text-xl font-bold">{t}</h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">{d}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
         </Section>
       </div>
 
@@ -259,6 +294,37 @@ function Index() {
           </div>
         </div>
       </footer>
+
+      {zoom && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Infografía del ciclo reproductivo del ajolote ampliada"
+          onClick={closeZoom}
+          className="fixed inset-0 z-[60] overflow-auto bg-deep/90 p-4 backdrop-blur-sm"
+        >
+          <div className="flex min-h-full items-center justify-center">
+            <div onClick={(e) => e.stopPropagation()} className="relative w-full max-w-2xl rounded-3xl bg-card p-3 shadow-2xl">
+              <button
+                ref={closeZoomRef}
+                type="button"
+                onClick={closeZoom}
+                aria-label="Cerrar imagen ampliada"
+                className="absolute right-4 top-4 z-10 grid h-11 w-11 place-items-center rounded-full bg-deep text-deep-foreground transition-colors hover:bg-coral hover:text-deep"
+              >
+                <Icon d="M6 6l12 12M18 6L6 18" />
+              </button>
+              <img
+                src={ciclo.url}
+                alt="Infografía del ciclo reproductivo del ajolote: cortejo y cópula, gestación y desarrollo del huevo, y nacimiento y cría"
+                width={497}
+                height={617}
+                className="mx-auto h-auto max-h-[80vh] w-auto rounded-2xl"
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       {showTop && (
         <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label="Volver arriba" className="fixed bottom-6 right-6 z-40 grid h-12 w-12 place-items-center rounded-full bg-coral text-deep shadow-xl transition-transform hover:-translate-y-1">
