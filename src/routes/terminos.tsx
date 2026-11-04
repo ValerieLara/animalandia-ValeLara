@@ -74,23 +74,33 @@ function Terminos() {
 
       <footer className="bg-deep text-deep-foreground">
         <div className="mx-auto max-w-6xl px-6 py-14">
-          <div className="grid gap-10 sm:grid-cols-2">
+          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
             <div>
               <p className="font-display text-3xl font-black">Animalandia<span className="text-coral">.</span></p>
-              <p className="mt-3 max-w-sm text-sm opacity-75">Divulgación sobre fauna mexicana para conocer, respetar y proteger a las especies en peligro.</p>
-              <p className="mt-4 text-sm opacity-75">Escrito por <strong className="opacity-100">Valerie Cristel Lara Díaz</strong></p>
+              <p className="mt-3 max-w-sm text-sm leading-relaxed opacity-85">Divulgación sobre fauna mexicana para conocer, respetar y proteger a las especies en peligro.</p>
+              <p className="mt-4 text-sm opacity-85">Escrito por <strong className="opacity-100">Valerie Cristel Lara Díaz</strong></p>
+            </div>
+            <div>
+              <h4 className="mb-4 font-sans text-xs font-bold tracking-[0.2em] text-lagoon">EXPLORA</h4>
+              <ul className="space-y-2 text-sm opacity-90">
+                <li><a href="/#queson" className="hover:text-coral">¿Qué son?</a></li>
+                <li><a href="/#quecomen" className="hover:text-coral">¿Qué comen?</a></li>
+                <li><a href="/#dondeviven" className="hover:text-coral">¿Dónde viven?</a></li>
+                <li><a href="/#reproduccion" className="hover:text-coral">Reproducción</a></li>
+                <li><a href="/#tipos" className="hover:text-coral">Tipos</a></li>
+              </ul>
             </div>
             <div>
               <h4 className="mb-4 font-sans text-xs font-bold tracking-[0.2em] text-lagoon">LEGAL</h4>
-              <ul className="space-y-2 text-sm opacity-80">
+              <ul className="space-y-2 text-sm opacity-90">
                 <li><a href="/#aviso" className="hover:text-coral">Aviso legal</a></li>
                 <li><a href="/#privacidad" className="hover:text-coral">Política de privacidad</a></li>
-                <li><span className="text-lagoon">Términos y condiciones</span></li>
+                <li><span className="font-semibold text-lagoon">Términos y condiciones</span></li>
                 <li><a href="/#cookies" className="hover:text-coral">Política de cookies</a></li>
               </ul>
             </div>
           </div>
-          <div className="mt-10 flex flex-col justify-between gap-3 border-t border-deep-foreground/15 pt-6 text-xs opacity-60 md:flex-row">
+          <div className="mt-10 flex flex-col justify-between gap-3 border-t border-deep-foreground/15 pt-6 text-xs leading-relaxed opacity-80 md:flex-row">
             <p>© {new Date().getFullYear()} Animalandia · Valerie Cristel Lara Díaz. Todos los derechos reservados.</p>
             <p>Hecho con respeto por los ajolotes de Xochimilco.</p>
           </div>
