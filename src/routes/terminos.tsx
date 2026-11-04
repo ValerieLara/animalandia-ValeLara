@@ -67,15 +67,33 @@ function Terminos() {
         </p>
 
         <div className="mt-10 flex flex-wrap gap-4 text-sm font-semibold">
-          <a href="/#privacidad" className={`rounded-full bg-primary px-5 py-3 text-primary-foreground transition-opacity hover:opacity-90 ${focusRing}`}>Política de privacidad</a>
-          <Link to="/" className={`rounded-full border border-border px-5 py-3 text-foreground transition-colors hover:border-primary hover:bg-secondary ${focusRing}`}>Ir a los ajolotes</Link>
+          <a href="/#privacidad" className="rounded-full bg-primary px-5 py-3 text-primary-foreground transition-opacity hover:opacity-90 outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2 focus-visible:ring-offset-background">Política de privacidad</a>
+          <Link to="/" className="rounded-full border border-border px-5 py-3 text-foreground transition-colors hover:border-primary hover:bg-secondary outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2 focus-visible:ring-offset-background">Ir a los ajolotes</Link>
         </div>
       </main>
 
-      <footer className="border-t border-border bg-muted">
-        <div className="mx-auto flex max-w-6xl flex-col justify-between gap-3 px-6 py-8 text-xs opacity-70 md:flex-row">
-          <p>© {new Date().getFullYear()} Animalandia · Valerie Cristel Lara Díaz. Todos los derechos reservados.</p>
-          <p>Hecho con respeto por los ajolotes de Xochimilco.</p>
+      <footer className="bg-deep text-deep-foreground">
+        <div className="mx-auto max-w-6xl px-6 py-14">
+          <div className="grid gap-10 sm:grid-cols-2">
+            <div>
+              <p className="font-display text-3xl font-black">Animalandia<span className="text-coral">.</span></p>
+              <p className="mt-3 max-w-sm text-sm opacity-75">Divulgación sobre fauna mexicana para conocer, respetar y proteger a las especies en peligro.</p>
+              <p className="mt-4 text-sm opacity-75">Escrito por <strong className="opacity-100">Valerie Cristel Lara Díaz</strong></p>
+            </div>
+            <div>
+              <h4 className="mb-4 font-sans text-xs font-bold tracking-[0.2em] text-lagoon">LEGAL</h4>
+              <ul className="space-y-2 text-sm opacity-80">
+                <li><a href="/#aviso" className="hover:text-coral">Aviso legal</a></li>
+                <li><a href="/#privacidad" className="hover:text-coral">Política de privacidad</a></li>
+                <li><span className="text-lagoon">Términos y condiciones</span></li>
+                <li><a href="/#cookies" className="hover:text-coral">Política de cookies</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="mt-10 flex flex-col justify-between gap-3 border-t border-deep-foreground/15 pt-6 text-xs opacity-60 md:flex-row">
+            <p>© {new Date().getFullYear()} Animalandia · Valerie Cristel Lara Díaz. Todos los derechos reservados.</p>
+            <p>Hecho con respeto por los ajolotes de Xochimilco.</p>
+          </div>
         </div>
       </footer>
     </div>
