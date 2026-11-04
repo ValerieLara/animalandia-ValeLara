@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import hero from "@/assets/hero-axolotl.jpg";
 import pair from "@/assets/axolotl-pair.jpg";
 import ciclo from "@/assets/ciclo-reproductivo-ajolote.jpg.asset.json";
+import habita from "@/assets/donde-viven-ajolotes.jpg.asset.json";
 import gMexicano from "@/assets/ajolote-mexicano.jpg.asset.json";
 import gAlchichica from "@/assets/ajolote-alchichica.jpg.asset.json";
 import gAltamirani from "@/assets/ambystoma-altamirani.jpg.asset.json";
@@ -204,15 +205,35 @@ function Index() {
       </div>
 
       <Section id="dondeviven" n="03" title="¿Dónde viven?">
-        <div className="grid gap-12 md:grid-cols-5">
-          <div className="space-y-5 text-lg leading-relaxed text-muted-foreground md:col-span-3">
-            <p>Las 33 especies son nativas exclusivamente de Norteamérica. Destacan en el centro y noroeste de México, aunque algunas viven en Estados Unidos, el suroeste de Alaska y el sur de Canadá.</p>
-            <p>El ajolote mexicano solo se encuentra en el lago de Xochimilco, donde sobrevive en peligro crítico.</p>
-          </div>
-          <div className="grid grid-cols-2 gap-4 md:col-span-2">
-            {[["17", "especies en México"], ["16", "endémicas"], ["1", "lago: Xochimilco"], ["CR", "peligro crítico"]].map(([a, b]) => (
-              <div key={b} className="rounded-2xl border border-border p-5"><p className="font-display text-3xl font-black text-primary">{a}</p><p className="text-sm text-muted-foreground">{b}</p></div>
-            ))}
+        <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:gap-14">
+          <figure className="mx-auto w-full max-w-[17rem] overflow-hidden rounded-3xl bg-card shadow-xl ring-1 ring-border sm:max-w-xs lg:max-w-none">
+            <button
+              type="button"
+              onClick={(e) => { openerRef.current = e.currentTarget; setZoom({ src: habita.url, alt: "Infografía del hábitat de los ajolotes en México: arriba, un ajolote moteado visto desde arriba junto a la nota “Los ajolotes son un tipo de salamandra. También tienen similitudes con los sapos y ranas.”; al centro, un mapa de la República Mexicana en tono salmón y magenta con la nota “Existen 17 especies de ajolote y 16 son propias del territorio de México.” y, a la izquierda, “Les gusta vivir en hábitats acuáticos: ríos de montaña, lagos y canales. Viven en muchos estados de México, como Morelos, Puebla, Sonora ¡y más!”; abajo, siluetas de cipreses y un ajolote rosa con la nota “Hay muchos tipos de ajolote, pero la especie más conocida es la Ambystoma mexicanum. Sólo se encuentra de forma natural en Xochimilco.”; al pie, los logotipos de la Secretaría del Medio Ambiente de la Ciudad de México" }); }}
+              aria-label="Ampliar la infografía del hábitat y la distribución de los ajolotes en México"
+              className="group block w-full cursor-zoom-in"
+            >
+              <img
+                src={habita.url}
+                alt="Infografía del hábitat de los ajolotes en México: un ajolote moteado visto desde arriba, un mapa de la República Mexicana que resalta la distribución de las especies, cipreses y un ajolote rosa de la especie Ambystoma mexicanum"
+                width={399}
+                height={501}
+                loading="lazy"
+                className="h-auto w-full transition-transform duration-700 group-hover:scale-[1.03]"
+              />
+            </button>
+            <figcaption className="border-t border-border px-5 py-4 text-xs leading-relaxed text-muted-foreground">
+              Hábitat y distribución de los ajolotes en México. Infografía de la Secretaría del Medio Ambiente de la Ciudad de México. Pulsa la imagen para verla más grande.
+            </figcaption>
+          </figure>
+          <div className="space-y-5 text-lg leading-relaxed text-muted-foreground">
+            <p>Los ajolotes son originarios de una serie de lagos interconectados en México. Este complejo lacustre incluye los lagos Xochimilco, Texcoco, Zumpango, Xaltocan y Chalco, y se ubica justo al sur de la actual Ciudad de México. Son lagos fríos, de agua dulce y endorreicos. El término “endorreico” significa que estos lagos no tienen salida al mar, es decir, no tienen salida aparente a un río ni al océano.</p>
+            <p>Los ajolotes solían prosperar en estas aguas gracias a la abundancia de nutrientes y a la escasez de depredadores naturales, lo que casi con toda seguridad explica por qué no se adaptaron a ningún otro entorno ni se desplazaron fuera de estos lagos.</p>
+            <div className="grid grid-cols-2 gap-4 pt-4 sm:grid-cols-4">
+              {[["5", "lagos del complejo"], ["17", "especies en México"], ["16", "endémicas"], ["CR", "peligro crítico"]].map(([a, b]) => (
+                <div key={b} className="rounded-2xl border border-border p-5"><p className="font-display text-3xl font-black text-primary">{a}</p><p className="text-sm text-muted-foreground">{b}</p></div>
+              ))}
+            </div>
           </div>
         </div>
       </Section>
